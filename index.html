@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mein kostenloser QR-Code Generator</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        /* Ein einfaches, sauberes Design */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        input {
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #qrcode {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>QR-Code Generator</h1>
+        <p>Gib einen Text oder einen Link ein:</p>
+        
+        <input type="text" id="text-input" value="https://google.com">
+        <button onclick="generiereQR()">Erstellen</button>
+
+        <div id="qrcode"></div>
+    </div>
+
+    <script>
+        // Diese Funktion wird aufgerufen, wenn man auf den Button klickt
+        function generiereQR() {
+            // Zuerst löschen wir den alten QR-Code, falls einer da ist
+            document.getElementById("qrcode").innerHTML = "";
+
+            // Wir holen uns den Text aus dem Eingabefeld
+            var eingabeText = document.getElementById("text-input").value;
+
+            // Wir erstellen den neuen QR-Code (Größe passt sich automatisch an)
+            new QRCode(document.getElementById("qrcode"), {
+                text: eingabeText,
+                width: 200,
+                height: 200,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.M
+            });
+        }
+
+        // Beim ersten Laden der Seite direkt einen QR-Code anzeigen
+        generiereQR();
+    </script>
+
+</body>
+</html>
